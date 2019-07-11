@@ -5,10 +5,13 @@ For Extropy.io, based on [Substrate tutorial pages](https://substrate.dev/substr
 
 # Requirements
 
+**Warning: the installation do not work properly yet. Need to be updated.**
+
 Here are the steps :
 
 1) Set up a local web server.
 2) Install the following dependencies locally :
+
 
 ```
 npm install highlightjs --save
