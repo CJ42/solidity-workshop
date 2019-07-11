@@ -3,7 +3,7 @@ A simple Solidity tutorial webpage with embedded code editor and syntax highligh
 
 For Extropy.io, based on [Substrate tutorial pages](https://substrate.dev/substrate-collectables-workshop/#/1/creating-a-storage-value?id=working-with-a-storage-value)
 
-![Screenshot](<a href="https://ibb.co/swx3wYk"><img src="https://i.ibb.co/T8jh83p/screenshot.png" alt="screenshot" border="0"></a> "UI Screenshot")
+![Screenshot](https://i.ibb.co/T8jh83p/screenshot.png "UI Screenshot")
 
 # Requirements
 
