@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="CJ42">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="Solidity Tutorial by Extropy.io">
+    <title>
+        Learn Solidity | by Extropy.io
+    </title>
+    <link rel="icon" type="image/png" href="assets/img/extropy-icon.png" />
+    <link rel="apple-touch-icon" href="assets/img/extropy-icon.png" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/extropy-theme.css" />
+    <link rel="stylesheet" href="assets/css/markdown.css" />
+    
+
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    
+
+    <!-- Highlight.js -->
+    <script type="text/javascript" src="node_modules/highlight.js/lib/highlight.js"></script>
+    <script type="text/javascript" src="node_modules/highlight.js/lib/languages/solidity.js"></script>
+    <link rel="stylesheet" href="node_modules/highlight.js/styles/vs2015.css">
+    <script type="text/javascript">
+    hljs.registerLanguage('solidity', window.hljsDefineSolidity);
+hljs.initHighlightingOnLoad();
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+    });
+});
+    </script>
+
+    <!-- CodeMirror - Browser based code editor -->
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
+    <script src="codemirror/lib/codemirror.js"></script>
+    <script src="codemirror/mode/solidity/solidity.js"></script>
+    <link rel="stylesheet" href="codemirror/theme/nord.css"/>
+</head>
+<body>
+    <section class="cover">
+        <main>
+            <aside class="sidebar bg-color-primary-4 ">
+                <div class="heading">
+                    <img src="assets/img/extropy-logo.svg" width="100%">
+                </div>
+                <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix">
+                    <div class="toc">
+                        <ul class="nav">
+                            <li class="">
+                                <a href="#Solidity-Tutorials" title="Solidity Tutorials">Solidity Tutorials</a>
+                                <ul class="nav">
+                                    <li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+                                    <li><a href="#1-Getter-and-Setter" title="1) Getter and Setter">1) Getter and Setter</a>
+                                        <ul class="nav">
+                                            <li><a href="#11-Getter-function-using-return" title="1.1) Getter function using  return">1.1) Getter function using  return</a></li>
+                                            <li><a href="#12-Setter-function-pass-parameters-to-our-function" title="1.2) Setter function: pass parameters to our function">1.2) Setter function: pass parameters to our function</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#2-Function-visibility" title="2) Function visibility">2) Function visibility</a>
+                                        <ul class="nav">
+                                            <li><a href="#21-Introduction" title="2.1) Introduction">2.1) Introduction</a></li>
+                                            <li><a href="#22-View-vs-Pure-" title="2.2) View vs Pure ?">2.2) View vs Pure ?</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#3-Adding-Security-with-Modifiers" title="3) Adding Security with Modifiers">3) Adding Security with Modifiers</a></li>
+                                    <li><a href="#4-Constructor" title="4) Constructor">4) Constructor</a></li>
+                                    <li><a href="#5-Events" title="5) Events">5) Events</a></li>
+                                    <li><a href="#6-References-Data-Types-Mappings" title="6) References Data Types: Mappings">6) References Data Types: Mappings</a></li>
+                                    <li><a href="#7-Reference-Data-Types-Arrays" title="7) Reference Data Types: Arrays">7) Reference Data Types: Arrays</a></li>
+                                    <li><a href="#8-Structs" title="8) Structs">8) Structs</a>
+                                        <ul class="nav">
+                                            <li><a href="#Example-of-a-contract-using-reference-datatypes" title="Example of a contract using reference datatypes">Example of a contract using reference datatypes</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#Useful-Links-and-further-resources" title="Useful Links and further resources">Useful Links and further resources</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="toc-menu">
+                        <ul>
+                            <li><a class="expand-toggle" href="#">Expand all</a></li>
+                            <li><a class="back-to-top" href="#">Back to top</a></li>
+                            <li><a class="go-to-bottom" href="#">Go to bottom</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+            <section class="content">
+                <article class="markdown-section">
+                    <div class="row">
+                        <div class="lesson column bg-color-primary-3">
+                                <div id="doc" class="markdown-body container-fluid comment-enabled" style="position: relative;">
+                                    <h1 id="Solidity-Tutorials">
+                                        <a class="anchor hidden-xs" href="#Solidity-Tutorials" title="Solidity-Tutorials">
+                                            <span class="octicon octicon-link"></span>
+                                        </a>Solidity Tutorials
+                                    </h1>
+                                    <p>Welcome to this smart contract workshop organised by <a href="http://extropy.io" target="_blank" rel="noopener">Extropy</a>.</p>
+                                    <p>In this tutorial, we are going to build a simple Score Dapp on Ethereum. You are going to learn Solidity, a programming language to create smart contracts on the Ethereum blockchain.</p>
+                                    <h2 id="Introduction">
+                                        <a class="anchor hidden-xs" href="#Introduction" title="Introduction">
+                                            <span class="octicon octicon-link"></span>
+                                        </a>Introduction
+                                    </h2>
+                                    <p>First, you would need to open <a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix</a>, a browser IDE to write and compile Solidity code.</p>
+                                    <ul>
+                                        <li><strong>How to define the Solidity version compiler ?</strong></li>
+                                    </ul>
+<div class="code-block" id="test">
+<pre class="hljs"><code class="solidity">// Any compiler version from the 0.5 release (= 0.5.x)
+pragma solidity ^0.5.0;    
+
+// Greater than version 0.4.5, less than version 0.5.4
+pragma solidity >0.4.5 <0.5.4;</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+</div>
+                                    
+                                    <ul>
+                                        <li><strong>How to define a contract ?</strong></li>
+                                    </ul>
+                                    <p>Use the keyword <code><span class="hljs-keyword">contract</span></code> followed by your contract name.</p>
+                                    <ul>
+                                        <li><strong>How to write variable in Solidity ?</strong></li>
+                                    </ul>
+                                        
+                                        <p>Contract would need some state. We are going to declare a new variable that will hold our score.</p><pre><code class="solidity hljs">contract <span class="hljs-keyword">Score </span>{
+                                        
+                                            uint <span class="hljs-keyword">score </span>= <span class="hljs-number">5</span><span class="hljs-comment">;</span>
+                                        
+                                        }
+                                        </code></pre>
+                                        <div class="warning-box">
+                                            <h2 id="Important-">
+                                                <a class="anchor hidden-xs" href="#Important-" title="Important-">
+                                                    <span class="octicon octicon-link"></span>
+                                                </a>Important !
+                                            </h2>
+                                            <p>Solidity is a statically typed language. So you always need to <b>declare the variable type</b> (here <code><span class="hljs-keyword">uint</span></code>) before the variable name.</p>
+                                            <p>Do not forget to end your declaration statements with a semicolon <code>;</code></p>
+                                        </div>
+                                        <hr>
+                                        <p>
+                                            <code><span class="hljs-keyword">uint</span></code> defines an <em>unsigned integer</em> of 256 bits by default.<br>
+                                            You can also specify the number of bits, by range of 8 bits. Here are some examples below:
+                                        </p>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center">Type</th>
+                                                    <th style="text-align:left">Number range</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center"><code><span class="hljs-keyword">uint8</span></code></td>
+                                                    <td style="text-align:left">0 to 255</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code><span class="hljs-keyword">uint16</span></code></td>
+                                                    <td style="text-align:left">0 to 65,535</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code><span class="hljs-keyword">uint32</span></code></td>
+                                                    <td style="text-align:left">0 to 4,294,967,295</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code><span class="hljs-keyword">uint64</span></code></td>
+                                                    <td style="text-align:left">0 to 18,446,744,073,709,551,615</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code><span class="hljs-keyword">uint128</span></code></td>
+                                                    <td style="text-align:left">0 to 2^128</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code><span class="hljs-keyword">uint256</span></code></td>
+                                                    <td style="text-align:left">0 to 2^256</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <h2 id="1-Getter-and-Setter">
+                                            <a class="anchor hidden-xs" href="#1-Getter-and-Setter" title="1-Getter-and-Setter">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>1) Getter and Setter
+                                        </h2>
+                                        <p>We need a way to write and retrieve the value of our <code>score</code>. We achieve this by creating a <strong>getter</strong> and <strong>setter</strong> functions.</p>
+                                        <p>In Solidity, you declare a function with the keyword <code><span class="hljs-keyword">function</span></code> followed the <em>function name</em> ( here <code>getScore()</code> ).</p>
+                                        <pre class="hljs">
+<code class="solidity">contract Score {
+                                        
+    uint score = <span class="hljs-number">5</span>;
+                                            
+    function getScore() returns (uint) {
+        return score;
+    }
+    
+    function setScore(uint new_score<) {
+        score = new_score;
+    }
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                                        <p>Let’s look at both functions in detail.</p>
+                                        <hr>
+                                        <h3 id="11-Getter-function-using-return">
+                                            <a class="anchor hidden-xs" href="#11-Getter-function-using-return" title="11-Getter-function-using-return">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>1.1) Getter function using  <code><span class="hljs-keyword">return</span></code>
+                                        </h3>
+                                        <p><u>Definiton</u> : In Solidity, a <strong>getter</strong> is a function that returns a value.</p>
+                                        <p>To return a value from a function (here our <code>score</code>), you use the following keywords:</p>
+                                        <ul>
+                                            <li><em>In the function definition:</em> <code><span class="hljs-keyword">returns</span></code>  + variable type returned between parentheses for example (<code><span class="hljs-keyword">uint</span></code>)</li>
+                                            <li><em>In the function body</em>: <code><span class="hljs-keyword">return</span></code> followed by what you want to return for example <code><span class="hljs-keyword">return</span> score;</code> or <code><span class="hljs-keyword">return</span> 137;</code></li>
+                                        </ul>
+                                        <hr>
+                                        <h3 id="12-Setter-function-pass-parameters-to-our-function">
+                                            <a class="anchor hidden-xs" href="#12-Setter-function-pass-parameters-to-our-function" title="12-Setter-function-pass-parameters-to-our-function">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>1.2) Setter function: pass parameters to our function
+                                        </h3>
+                                        <p>
+                                            <u>Definition </u>: In Solidity, a <strong>setter</strong> is a function that modifies the value of a variable (<strong>modifies the state of the contract</strong>). 
+                                            To create a <strong>setter</strong>, you must specify the <strong>parameters</strong> when you declare your function.
+                                        </p>
+                                        <p>
+                                            After your function name, specifies between parentheses 1) the <strong>variable type</strong> (<code><span class="hljs-keyword">uint</span></code>) 
+                                            and 2) the <strong>variable name</strong> (<code>new_score</code>)
+                                        </p>
+                                        <div class="error-box">
+                                            <h2 id="Compiler-Error">
+                                                <a class="anchor hidden-xs" href="#Compiler-Error" title="Compiler-Error">
+                                                    <span class="octicon octicon-link"></span>
+                                                </a>Compiler Error:
+                                            </h2>
+                                             <p>Try entering this code in Remix. We are still not there. The compiler should give you the following error:</p>
+                                             <pre class="hljs">Syntax Error: No visibility specified. Did you intend to add "<b>public</b>" ?</pre>
+                                             <span>Therefore, we need to specify a visibility for our function. We are going to cover the notion of <b>visibility</b> in the next section.</span>
+                                        </div>
+                                        <h2 id="2-Function-visibility">
+                                            <a class="anchor hidden-xs" href="#2-Function-visibility" title="2-Function-visibility">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>2) Function visibility
+                                        </h2>
+                                        <h3 id="21-Introduction">
+                                            <a class="anchor hidden-xs" href="#21-Introduction" title="21-Introduction">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>2.1) Introduction
+                                        </h3>
+                                        <p>To make our functions work, we need to specify their <em>visibility</em> in the contract.</p>
+                                        <p>Add the keyword <code><span class="hljs-keyword">public</span></code> after your function name.</p>
+                                        <pre class="hljs">
+<code class="solidity">contract Score {
+                                        
+    uint score = 5;
+                                            
+    function getScore() public returns (uint) {
+        return score;
+    }
+                                            
+    function setScore (uint new_score) public {
+        score = new_score;
+    }
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button>
+                                        </pre>
+                                        <ul>
+                                            <li><strong>What does the</strong> <code><span class="hljs-keyword">public</span></code> <strong>keyword mean ?</strong></li>
+                                        </ul>
+                                        <p>
+                                            There are four types of <em>visibility</em> for functions in Solidity : <code><span class="hljs-keyword">public</span></code>, <code><span class="hljs-keyword">private</span></code>, <code><span class="hljs-keyword">external</span></code> and <code><span class="hljs-keyword">internal</span></code>. 
+                                            The table below explains the difference.
+                                        </p>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Visibility</th>
+                                                    <th style="text-align:center">Contract itself</th>
+                                                    <th style="text-align:center">Derived Contracts</th>
+                                                    <th style="text-align:center">External Contracts</th>
+                                                    <th style="text-align:center">External Addresses</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><code><span class="hljs-keyword">public</span></code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code><span class="hljs-keyword">private</span></code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"></td>
+                                                    <td style="text-align:center"></td>
+                                                    <td style="text-align:center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code><span class="hljs-keyword">internal</span></code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"></td>
+                                                    <td style="text-align:center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code><span class="hljs-keyword">external</span></code></td>
+                                                    <td style="text-align:center"></td>
+                                                    <td style="text-align:center"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="learn-box">
+                                             <h2 id="Learn-More" class="color-primary-4">
+                                                 <a class="anchor hidden-xs" href="#Learn-More" title="Learn-More">
+                                                     <span class="octicon octicon-link"></span>
+                                                </a>Learn More:
+                                            </h2>  
+                                             <ul>
+                                                <li>Those keywords are also available for state variables, except for <code><span class="hljs-keyword">external</span></code>.</li>
+                                                <li>
+                                                    For simplicity, you could add the <code><span class="hljs-keyword">public</span></code> keyword to the variable. This would automatically create a <b>getter</b> for the variable. 
+                                                    You would not need to create a <b>getter</b> function manually. (see code below)
+                                                </li>
+                                             </ul>
+                                             <pre class="hljs"><code class="solidity">uint score public;</code></pre>
+                                        </div>
+                                        <hr>
+                                        <p>Try entering that in Remix. We are still not getting there ! You should receive the following Warning on Remix.</p>
+                                        <div class="warning-box">
+                                            <h2 id="Compiler-Warning">
+                                                <a class="anchor hidden-xs" href="#Compiler-Warning" title="Compiler-Warning">
+                                                    <span class="octicon octicon-link"></span>
+                                                </a>Compiler Warning:
+                                            </h2>
+                                            <pre class="hljs">Warning: Function state mutability can be restricted to <b>view</b>.</pre>
+                                        </div>
+                                        <h3 id="22-View-vs-Pure-">
+                                            <a class="anchor hidden-xs" href="#22-View-vs-Pure-" title="22-View-vs-Pure-">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>2.2) <code><span class="hljs-keyword">View</span></code> vs <code><span class="hljs-keyword">Pure</span></code> ?
+                                        </h3>
+                                        <ul>
+                                            <li><code><span class="hljs-keyword">view</span></code> functions can <strong>only read</strong> from the contract storage. They can’t modify the contract storage. Usually, you will use <code><span class="hljs-keyword">view</span></code> for getters.</li>
+                                            <li><code><span class="hljs-keyword">pure</span></code> functions can <strong>neither read nor modify</strong> the contract storage. They are only used for <em>computation</em> (like mathematical operations).</li>
+                                        </ul>
+                                        <p>Because our function <code>getScore()</code> only reads from the contract state, it is a <code><span class="hljs-keyword">view</span></code> function.</p>
+<pre class="hljs"><code class="solidity">function getScore() public view returns (uint) {
+    return score;
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                                        <h2 id="3-Adding-Security-with-Modifiers">
+                                            <a class="anchor hidden-xs" href="#3-Adding-Security-with-Modifiers" title="3-Adding-Security-with-Modifiers">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>3) Adding Security with Modifiers
+                                        </h2>
+                                        <p>Our contract has a security issue: <strong>Anyone can modify the score</strong>.</p>
+                                        <p>
+                                            Solidity provides a global variable <code><span class="hljs-built_in">msg</span></code>, that refers to the address that interacts with the contract’s functions. 
+                                            The <code><span class="hljs-built_in">msg</span></code> variables offers two associated fields:
+                                        </p>
+                                        <ul>
+                                            <li><code><span class="hljs-built_in">msg</span>.<span class="hljs-built_in">sender</span></code>: returns the address of the caller of the function.</li>
+                                            <li><code><span class="hljs-built_in">msg</span>.<span class="hljs-built_in">value</span></code>: returns the value in <strong>Wei</strong> of the amount of Ether sent to the function.</li>
+                                        </ul>
+                                        <p><strong>How to restrict a function to a specific caller ?</strong></p>
+                                        <p>We should have a feature that enables only certain addresses to change the score (your address). To achieve this, we will introduce the notion of <strong>modifiers</strong>.</p>
+                                        <p>
+                                            <u>Definition</u> : A <code><span class="hljs-keyword">modifier</span></code> is a special function that enables us to change the behaviour of functions in Solidity. 
+                                            It is mostly used to automatically check a condition before executing a function.
+                                        </p>
+                                        <p>We will use the following modifier to restrict the function to only the <em>contract owner</em>.</p>
+
+<pre class="hljs"><code class="solidity">address owner;
+                                            
+modifier onlyOwner {
+    if (msg.sender == owner) {
+        _;
+    }
+}
+
+function setScore (uint new_score) public onlyOwner {
+    score = new_score;
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+
+                                        <p>The <code><span class="hljs-keyword">modifier</span></code> works with the following flow:</p>
+                                        <ol>
+                                            <li>
+                                                <p>Check that the address of the caller (<code><span class="hljs-keyword">msg</span>.sender</code>) is equal to <code>owner</code> address.</p>
+                                            </li>
+                                            <li>
+                                                <p>If 1) is true, it passes the check. The <code><span class="hljs-keyword">_</span>;</code> will be replaced by the function body where the modifier is attached.</p>
+                                            </li>
+                                        </ol>
+                                        <p>A <code><span class="hljs-keyword">modifier</span></code> <u> can receive arguments</u> like functions. Here is an example of a modifier that requires the caller to send a specific amount of Ether.</p>
+                                        
+<pre class="hljs"><code class="solidity">modifier Fee(uint fee) {
+    if (msg.value == fee) {
+        _;
+    }
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                                        <p>However, we still haven’t defined who the owner is. We will define that in the <strong>constructor</strong>.</p>
+                                        <h2 id="4-Constructor">
+                                            <a class="anchor hidden-xs" href="#4-Constructor" title="4-Constructor">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>4) Constructor
+                                        </h2>
+                                        <p><u>Definition</u> : A <code><span class="hljs-keyword">constructor</span></code> is a function that is <strong>executed only once</strong> when the contract is deployed on the Ethereum blockchain.</p>
+                                        <p>In the code below, we define the contract owner:</p>
+<pre class="hljs"><code class="solidity">contract Score {
+                                        
+    address owner;
+                                        
+    constructor() public {
+        owner = msg.sender;
+    }
+
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                                        <div class="learn-box">
+                                            <h2 id="Learn-More" class="color-primary-4">
+                                                <a class="anchor hidden-xs" href="#Learn-More" title="Learn-More">
+                                                     <span class="octicon octicon-link"></span>
+                                                </a>Learn More:
+                                            </h2>
+                                             <p>Constructors are optional. If there is no constructor, the contract will assume the default constructor, which is equivalent to <code><span class="hljs-keyword">constructor</span> () <span class="hljs-keyword">public</span> {}</code></p>
+                                        </div>
+                                        <div class="warning-box">
+                                             <h2 id="Warning-">
+                                                 <a class="anchor hidden-xs" href="#Warning-" title="Warning-">
+                                                     <span class="octicon octicon-link"></span>
+                                                </a>Warning !
+                                            </h2>
+                                             <p>Prior to version 0.4.22, constructors were defined as function with the same name as the contract. This syntax was deprecated and is not allowed in version 0.5.0.</p>
+                                        </div>
+                                        <h2 id="5-Events">
+                                            <a class="anchor hidden-xs" href="#5-Events" title="5-Events">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>5) Events
+                                        </h2>
+                                        <p>Events are only used in Web3 to output some return values. They are a way to show the changes made into a contract.</p>
+                                        <p>Events act like a log statement. You declare <strong>Events</strong> in Soldity as follow:</p>
+
+<pre class="hljs"><code class="solidity">// Outside a function
+event myEvent(type1, type2, ... );
+                                        
+// Inside a function
+emit myEvent(param1, param2, ... );</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+
+                                        <p>
+                                            To illustrate, we are going to create an event, using the <code><span class="hljs-keyword">event</span></code> keyword to display the new score set. This event  will be passed within our <code>setScore()</code> function. 
+                                            <strong>Remember that you should pass the score after you have set the new variable.</strong>
+                                        </p>
+
+<pre class="hljs"><code class="solidity">event Score_set(uint);
+                                        
+function setScore(uint new_score) public onlyOwner {
+    score = new_score;
+    emit Score_set(new_score);
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                                    
+                                        <p>You can also use the keyword <code><span class="hljs-keyword">indexed</span></code> in front of the parameter’s types in the <code><span class="hljs-keyword">event</span></code> definition.</p>
+                                        <p>It will create an <strong>index</strong> that will enable to search for eventsvia Web3 in your front-end.</p>
+                                        
+<pre class="hljs"><code class="solidity">event Score_set(uint indexed);</code></pre>
+
+                                        <div class="warning-box">
+                                            <h2 id="Note-">
+                                                <a class="anchor hidden-xs" href="#Note-" title="Note-">
+                                                    <span class="octicon octicon-link"></span>
+                                                </a>Note !
+                                            </h2>
+                                            <p>
+                                                <code><span class="hljs-keyword">event</span></code> can be used with any functions types (<code><span class="hljs-keyword">public</span></code>, <code><span class="hljs-keyword">private</span></code>, <code><span class="hljs-keyword">internal</span></code> or <code><span class="hljs-keyword">external</span></code>). 
+                                                However, they are <b>only visible outside the contract</b>.
+                                            </p>
+                                            <p><code><span class="hljs-keyword">event</span></code> are are not visible internally by Solidity. You cannot read an  <code><span class="hljs-keyword">event</span></code>. So a function cannot read the <code><span class="hljs-keyword">event</span></code> emitted by another function for instance.</p>
+                                        </div>
+                                        <div class="learn-box">
+                                            <h2 id="Learn-more-">
+                                                <a class="anchor hidden-xs" href="#Learn-more-" title="Learn-more-">
+                                                    <span class="octicon octicon-link"></span>
+                                                </a>Learn more !
+                                            </h2>
+                                            <p>
+                                                When you call an <code><span class="hljs-keyword">event</span></code> in Solidity, the arguments passed to it are stored in the transaction’s log - a special data structure in the Ethereum blockchain. 
+                                                These logs are associated with the address of the contract, incorporated into the blockchain, and stay there as long as a block is accessible.
+                                            </p>
+                                        </div>
+                                        <h2 id="6-References-Data-Types-Mappings">
+                                            <a class="anchor hidden-xs" href="#6-References-Data-Types-Mappings" title="6-References-Data-Types-Mappings">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>6) References Data Types: <code><span class="hljs-keyword">mapping</span></code>
+                                        </h2>
+                                        <p>
+                                            Mappings are another important complex data type used in Solidity. They are useful for association, such as associating an address with a balance or a score. 
+                                            You define a <code><span class="hljs-keyword">mapping</span></code> in Solidity as follow:
+                                        </p>
+                                        
+<pre class="hljs"><code class="solidity">mapping(KeyType => ValueType) mapping_name;</code></pre>
+
+                                        <p>You can find below a summary of all the datatypes supported for the key and the value in a mapping.</p>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center">type</th>
+                                                    <th style="text-align:center">Key</th>
+                                                    <th style="text-align:center">Value</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center"><code>int/uint</code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>string</code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>bytes</code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>address</code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>struct</code></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>mapping</code></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>enums</code></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>Contract</code></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>fixed-sized array</code></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>dynamic-size array</code></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                    <td style="text-align:center"><img alt=":heavy_check_mark:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/heavy_check_mark.png" title=":heavy_check_mark:"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center"><code>variable</code></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                    <td style="text-align:center"><img alt=":x:" class="emoji" src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/x.png" title=":x:"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>You can access the value associated with a key in a mapping by specifing the key name inside square brackets <code>[]</code> as follows: <code>mapping_name[key]</code>.</p>
+                                        <p>Our smart contract will store a mapping of all the user’s addresses and their associated score. The function <code>getUserScore(<span class="hljs-keyword">address</span> _user)</code> enables to retrieve the score associated to a specific user’s address.</p>
+                                        
+<pre class="hljs"><code class="solidity">mapping(address => uint) score_list;
+                                        
+function getUserScore(address user) public view returns (uint) {
+    return score_list[user];
+}</code></pre>
+                        
+                                        <div class="warning-box">
+                                            <h2 id="Tips">
+                                                 <a class="anchor hidden-xs" href="#Tips" title="Tips">
+                                                     <span class="octicon octicon-link"></span>
+                                                </a>Tips:
+                                            </h2>
+                                            <p>you can use the keyword <code>public</code> in front of a mapping name to create automatically a <b>getter</b> function in Solidity, as follow:</p>
+                                            <pre class="hljs"><code class="solidity">mapping(address => uint) public score_list;</code></pre>
+                                         </div><div class="learn-box">
+                                             <h2 id="Learn-More"><a class="anchor hidden-xs" href="#Learn-More" title="Learn-More"><span class="octicon octicon-link"></span></a>Learn More:</h2>
+                                             <p>In Solidity, mappings do not have a length, and there is no concept of a value associated with a key.</p>
+                                             <p>Mappings are virtually initialized in Solidity, such that every possible key exists and is mapped to a value which is the default value for that datatype.</p>
+                                         </div><hr><h2 id="7-Reference-Data-Types-Arrays"><a class="anchor hidden-xs" href="#7-Reference-Data-Types-Arrays" title="7-Reference-Data-Types-Arrays"><span class="octicon octicon-link"></span></a>7) Reference Data Types: Arrays</h2><p>Arrays are also an important part of Solidity. You have two types of arrays (<code>T</code> represents the data type and <code>k</code> the maximum number of elements):</p><ul>
+                                        <li><strong>Fixed size</strong> array : <code>T[k]</code></li>
+                                        <li><strong>Dynamic Size</strong> array : <code>T[]</code></li>
+                                        </ul><pre><code class="solidity hljs">uint[] all_possible_number<span class="hljs-comment">;        </span>
+                                        uint[<span class="hljs-number">9</span>] one_digit_number<span class="hljs-comment">;</span>
+                                        </code></pre><p>In Solidity, arrays are ordered numerically. Array indices are zero based. So the index of the 1st element will be <strong>0</strong>. You access an element in an array in the same way than you do for a mapping:</p><pre><code class="solidity hljs">uint my_score = score_list[owner]<span class="hljs-comment">;</span>
+                                        </code></pre><p>You can also used the following two methods to work with arrays:</p><ul>
+                                        <li><code>array_name.length</code> : returns the number of elements the array holds.</li>
+                                        <li><code>array_name.push(new_element)</code> : adds a new element at the end of the array.</li>
+                                        </ul><h2 id="8-Structs"><a class="anchor hidden-xs" href="#8-Structs" title="8-Structs"><span class="octicon octicon-link"></span></a>8) Structs</h2><p>We can build our own datatypes by combining simpler datatypes together into more complex types using structs<br>
+                                        We use the keyword <strong>struct</strong>, followed by the structure name , then the fields that make up the structure.<br>
+                                        For example</p><pre><code>  struct Funder {
+                                                address addr;
+                                                uint amount;
+                                            }
+                                        </code></pre><p>Here we have created a datatype called Funder, that is composed of an address and a uint.</p><p>We can now declare a variable of that type</p><pre><code>Funder giver;
+                                        </code></pre><p>and reference the elements using dot notation</p><pre><code>giver.addr = address (0xBA7283457B0A138890F21DE2ebCF1AfB9186A2EF);
+                                        giver.amount = 2500;
+                                        
+                                        </code></pre><p>The size of the structure has to be finite, this imposes restrictions on the elements that can be included in the struct.</p><h3 id="Example-of-a-contract-using-reference-datatypes"><a class="anchor hidden-xs" href="#Example-of-a-contract-using-reference-datatypes" title="Example-of-a-contract-using-reference-datatypes"><span class="octicon octicon-link"></span></a>Example of a contract using reference datatypes</h3><details>
+                                          <summary>Click to expand!</summary>
+<pre class="hljs"><code class="solidity">pragma solidity ^0.5.0;
+
+contract ListExample {
+
+    struct DataStruct {
+    address userAddress;
+    uint userID;
+    }
+
+    DataStruct[] public records;
+
+    function createRecord1(address _userAddress, uint _userID) public returns(uint recordNumber) {
+    DataStruct memory newRecord;
+    newRecord.userAddress = _userAddress;
+    newRecord.userID    = _userID;
+    return records.push(newRecord)-1;
+    }
+
+    function createRecord2(address _userAddress, uint _userID) public returns(uint recordNumber) {
+    return records.push(DataStruct({userAddress:_userAddress,userID:_userID}))-1;
+    }
+
+    function getRecordCount() public view returns(uint recordCount) {
+    return records.length;
+    }
+}
+</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                                        </details><h2 id="Useful-Links-and-further-resources"><a class="anchor hidden-xs" href="#Useful-Links-and-further-resources" title="Useful-Links-and-further-resources"><span class="octicon octicon-link"></span></a>Useful Links and further resources</h2><p><a href="https://solidity.readthedocs.io" target="_blank" rel="noopener">Official Solidity Documentation</a></p><p><a href="https://solidity.readthedocs.io/en/develop/units-and-global-variables.html" target="_blank" rel="noopener">Globally Available Variables</a></p><p><a href="https://github.com/OpenZeppelin/openzeppelin-solidity" target="_blank" rel="noopener">Open Zeppelin Libraries</a></p><h4 id="Online-Help"><a class="anchor hidden-xs" href="#Online-Help" title="Online-Help"><span class="octicon octicon-link"></span></a>Online Help</h4><p><a href="https://whatthefuckisethereum.com" target="_blank" rel="noopener">WTF is Ethereum</a><br>
+                                        <a href="https://ethereum.stackexchange.com" target="_blank" rel="noopener">Ethereum Stack Exchange</a><br>
+                                        <a href="https://ethereum-magicians.org/" target="_blank" rel="noopener">Ethereum Magicians</a><br>
+                                        <a href="https://ethresear.ch/" target="_blank" rel="noopener">Ethereum Research</a></p><h4 id="Other-Tutorials"><a class="anchor hidden-xs" href="#Other-Tutorials" title="Other-Tutorials"><span class="octicon octicon-link"></span></a>Other Tutorials</h4><p><a href="https://cryptozombies.io/en/lesson/1" target="_blank" rel="noopener">Crypto Zombies</a></p></div>
+                        </div>
+                        <div class="code column">
+                            <textarea id="editor">
+pragma solidity 0.5.0;
+                                
+contract Score {
+                                    
+    // Write your code here
+                                
+}
+                            </textarea>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </section>
+    
+    <script src="assets/js/editor.js"></script>
+    <!-- <script src="assets/js/markdown.js"></script> -->
+</body>
+</html>

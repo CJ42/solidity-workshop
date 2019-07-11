@@ -1,0 +1,118 @@
+body {
+    overflow: hidden !important;
+}
+
+.content {
+    padding-left: 10px;
+    left: 200px;
+    position: absolute;
+    width: 100%;
+}
+
+.markdown-section {
+    max-width: 100%;
+    position: relative;
+    padding: 0px;
+    margin: 0px auto;
+}
+
+.sidebar {
+    position: fixed;
+    width: 200px;
+    z-index: 20;
+    overflow-y: scroll;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.learn-box {
+    color: rgb(10, 10, 10) !important;
+    background: rgb(93, 108, 118);
+    border-radius: 8px;
+    padding: 2%;
+    margin: 2% 0px;
+}
+
+.warning-box {
+    color: rgb(10, 10, 10) !important;
+    background: rgb(185, 177, 143);
+    border-radius: 8px;
+    padding: 2%;
+    margin: 2% 0px;
+}
+
+.error-box {
+    color: white !important;
+    background: rgb(180, 139, 142);
+    border-radius: 8px;
+    padding: 2%;
+    margin: 2% 0px;
+}
+
+.toc a {
+    color: rgb(250, 250, 250);
+}
+
+.code-block:hover, .hljs:hover + .copy-clipboard {
+    visibility: visible;
+}
+
+.copy-clipboard {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+    visibility: hidden;
+    overflow: visible;
+    padding: 0.65em 0.8em;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 0px;
+    outline: 0px;
+    background-color: #b48ead !important;
+}
+
+.cm-s-nord.CodeMirror {
+    color: rgb(220, 220, 220) !important;
+    background: rgb(30, 30, 30) !important;
+}
+
+.CodeMirror {
+    height: 100% !important;
+}
+
+h3, h4, details {
+    color: rgb(228, 222, 196) !important;
+}
+
+.markdown-body table {
+    color: black !important;
+}
+
+a {
+    color: rgb(250, 250, 250) !important;
+}
+
+a:hover {
+    color: rgb(228, 222, 196) !important;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: inherit !important;
+}
+
+#doc {
+    padding: 30px;
+}
