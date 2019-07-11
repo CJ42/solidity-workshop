@@ -583,7 +583,7 @@ function setScore(uint new_score) public onlyOwner {
                                         
 function getUserScore(address user) public view returns (uint) {
     return score_list[user];
-}</code></pre>
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
                         
                                         <div class="warning-box">
                                             <h2 id="Tips">
@@ -593,30 +593,83 @@ function getUserScore(address user) public view returns (uint) {
                                             </h2>
                                             <p>you can use the keyword <code>public</code> in front of a mapping name to create automatically a <b>getter</b> function in Solidity, as follow:</p>
                                             <pre class="hljs"><code class="solidity">mapping(address => uint) public score_list;</code></pre>
-                                         </div><div class="learn-box">
-                                             <h2 id="Learn-More"><a class="anchor hidden-xs" href="#Learn-More" title="Learn-More"><span class="octicon octicon-link"></span></a>Learn More:</h2>
+                                        </div>
+                                        <div class="learn-box">
+                                             <h2 id="Learn-More">
+                                                <a class="anchor hidden-xs" href="#Learn-More" title="Learn-More">
+                                                    <span class="octicon octicon-link"></span>
+                                                </a>Learn More:
+                                            </h2>
                                              <p>In Solidity, mappings do not have a length, and there is no concept of a value associated with a key.</p>
                                              <p>Mappings are virtually initialized in Solidity, such that every possible key exists and is mapped to a value which is the default value for that datatype.</p>
-                                         </div><hr><h2 id="7-Reference-Data-Types-Arrays"><a class="anchor hidden-xs" href="#7-Reference-Data-Types-Arrays" title="7-Reference-Data-Types-Arrays"><span class="octicon octicon-link"></span></a>7) Reference Data Types: Arrays</h2><p>Arrays are also an important part of Solidity. You have two types of arrays (<code>T</code> represents the data type and <code>k</code> the maximum number of elements):</p><ul>
-                                        <li><strong>Fixed size</strong> array : <code>T[k]</code></li>
-                                        <li><strong>Dynamic Size</strong> array : <code>T[]</code></li>
-                                        </ul><pre><code class="solidity hljs">uint[] all_possible_number<span class="hljs-comment">;        </span>
-                                        uint[<span class="hljs-number">9</span>] one_digit_number<span class="hljs-comment">;</span>
-                                        </code></pre><p>In Solidity, arrays are ordered numerically. Array indices are zero based. So the index of the 1st element will be <strong>0</strong>. You access an element in an array in the same way than you do for a mapping:</p><pre><code class="solidity hljs">uint my_score = score_list[owner]<span class="hljs-comment">;</span>
-                                        </code></pre><p>You can also used the following two methods to work with arrays:</p><ul>
-                                        <li><code>array_name.length</code> : returns the number of elements the array holds.</li>
-                                        <li><code>array_name.push(new_element)</code> : adds a new element at the end of the array.</li>
-                                        </ul><h2 id="8-Structs"><a class="anchor hidden-xs" href="#8-Structs" title="8-Structs"><span class="octicon octicon-link"></span></a>8) Structs</h2><p>We can build our own datatypes by combining simpler datatypes together into more complex types using structs<br>
-                                        We use the keyword <strong>struct</strong>, followed by the structure name , then the fields that make up the structure.<br>
-                                        For example</p><pre><code>  struct Funder {
-                                                address addr;
-                                                uint amount;
-                                            }
-                                        </code></pre><p>Here we have created a datatype called Funder, that is composed of an address and a uint.</p><p>We can now declare a variable of that type</p><pre><code>Funder giver;
-                                        </code></pre><p>and reference the elements using dot notation</p><pre><code>giver.addr = address (0xBA7283457B0A138890F21DE2ebCF1AfB9186A2EF);
-                                        giver.amount = 2500;
+                                        </div>
+                                        <hr>
+                                        <h2 id="7-Reference-Data-Types-Arrays">
+                                            <a class="anchor hidden-xs" href="#7-Reference-Data-Types-Arrays" title="7-Reference-Data-Types-Arrays">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>7) Reference Data Types: Arrays
+                                        </h2>
+                                        <p>
+                                            Arrays are also an important part of Solidity. There are two types of arrays in Solidity (
+                                            <code>T</code> represents the data type and <code>k</code> the maximum number of elements):
+                                        </p>
+                                        <ul>
+                                            <li><strong>Fixed size</strong> array : <code>T[k]</code></li>
+                                            <li><strong>Dynamic Size</strong> array : <code>T[]</code></li>
+                                        </ul>
                                         
-                                        </code></pre><p>The size of the structure has to be finite, this imposes restrictions on the elements that can be included in the struct.</p><h3 id="Example-of-a-contract-using-reference-datatypes"><a class="anchor hidden-xs" href="#Example-of-a-contract-using-reference-datatypes" title="Example-of-a-contract-using-reference-datatypes"><span class="octicon octicon-link"></span></a>Example of a contract using reference datatypes</h3><details>
+<pre class="hljs"><code class="solidity">uint[] all_possible_number;
+uint[9] one_digit_number;</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+                    
+                                        <p>
+                                            In Solidity, arrays are ordered numerically. Array indices are zero based. So the index of the 1st element will be <strong>0</strong>. 
+                                            You access an element in an array in the same way than you do for a mapping:
+                                        </p>
+                                        
+<pre class="hljs"><code class="solidity">uint my_score = score_list[owner];</code></pre>
+
+                                        <p>You can also used the following two methods to work with arrays:</p>
+                                        
+                                        <ul>
+                                            <li><code>array_name.<span class="hljs-built_in">length</span></code> : returns the number of elements the array holds.</li>
+                                            <li><code>array_name.<span class="hljs-built_in">push</span>(new_element)</code> : adds a new element at the end of the array.</li>
+                                        </ul>
+                                        
+                                        <h2 id="8-Structs">
+                                            <a class="anchor hidden-xs" href="#8-Structs" title="8-Structs">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>8) Structs
+                                        </h2>
+                                        <p>
+                                            We can build our own datatypes by combining simpler datatypes together into more complex types using structs<br>
+                                            We use the keyword <code><span class="hljs-keyword">struct</span></code>, followed by the structure name , then the fields that make up the structure.<br>
+                                            For example
+                                        </p>
+                                        
+<pre class="hljs"><code class="solidity">struct Funder {
+    address addr;
+    uint amount;
+}</code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
+
+                                        <p>Here we have created a datatype called <code>Funder</code>, that is composed of an address and a uint.</p>
+                                        <p>We can now declare a variable of that type</p>
+                                        
+<pre class="hljs"><code class="solidity">Funder giver;</code></pre>
+
+                                        <p>and reference the elements using dot notation</p>
+                                        
+<pre class="hljs"><code class="solidity">giver.addr = address (0xBA7283457B0A138890F21DE2ebCF1AfB9186A2EF);
+giver.amount = 2500;</code></pre>
+
+                                        <p>The size of the structure has to be finite, this imposes restrictions on the elements that can be included in the struct.</p>
+                                        
+                                        <h3 id="Example-of-a-contract-using-reference-datatypes">
+                                            <a class="anchor hidden-xs" href="#Example-of-a-contract-using-reference-datatypes" title="Example-of-a-contract-using-reference-datatypes">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>Example of a contract using reference datatypes
+                                        </h3>
+                                        
+                                        <details>
                                           <summary>Click to expand!</summary>
 <pre class="hljs"><code class="solidity">pragma solidity ^0.5.0;
 
@@ -645,10 +698,37 @@ contract ListExample {
     }
 }
 </code><button class="copy-clipboard"><span class="label">Copy to clipboard</span></button></pre>
-                                        </details><h2 id="Useful-Links-and-further-resources"><a class="anchor hidden-xs" href="#Useful-Links-and-further-resources" title="Useful-Links-and-further-resources"><span class="octicon octicon-link"></span></a>Useful Links and further resources</h2><p><a href="https://solidity.readthedocs.io" target="_blank" rel="noopener">Official Solidity Documentation</a></p><p><a href="https://solidity.readthedocs.io/en/develop/units-and-global-variables.html" target="_blank" rel="noopener">Globally Available Variables</a></p><p><a href="https://github.com/OpenZeppelin/openzeppelin-solidity" target="_blank" rel="noopener">Open Zeppelin Libraries</a></p><h4 id="Online-Help"><a class="anchor hidden-xs" href="#Online-Help" title="Online-Help"><span class="octicon octicon-link"></span></a>Online Help</h4><p><a href="https://whatthefuckisethereum.com" target="_blank" rel="noopener">WTF is Ethereum</a><br>
-                                        <a href="https://ethereum.stackexchange.com" target="_blank" rel="noopener">Ethereum Stack Exchange</a><br>
-                                        <a href="https://ethereum-magicians.org/" target="_blank" rel="noopener">Ethereum Magicians</a><br>
-                                        <a href="https://ethresear.ch/" target="_blank" rel="noopener">Ethereum Research</a></p><h4 id="Other-Tutorials"><a class="anchor hidden-xs" href="#Other-Tutorials" title="Other-Tutorials"><span class="octicon octicon-link"></span></a>Other Tutorials</h4><p><a href="https://cryptozombies.io/en/lesson/1" target="_blank" rel="noopener">Crypto Zombies</a></p></div>
+                                        </details>
+                                        <h2 id="Useful-Links-and-further-resources">
+                                            <a class="anchor hidden-xs" href="#Useful-Links-and-further-resources" title="Useful-Links-and-further-resources">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>Useful Links and further resources
+                                        </h2>
+                                        
+                                        <p><a href="https://solidity.readthedocs.io" target="_blank" rel="noopener">Official Solidity Documentation</a></p>
+                                        <p><a href="https://solidity.readthedocs.io/en/develop/units-and-global-variables.html" target="_blank" rel="noopener">Globally Available Variables</a></p>
+                                        <p><a href="https://github.com/OpenZeppelin/openzeppelin-solidity" target="_blank" rel="noopener">Open Zeppelin Libraries</a></p>
+                                        
+                                        <h4 id="Online-Help">
+                                            <a class="anchor hidden-xs" href="#Online-Help" title="Online-Help">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>Online Help
+                                        </h4>
+                                        
+                                        <p>
+                                            <a href="https://whatthefuckisethereum.com" target="_blank" rel="noopener">WTF is Ethereum</a><br>
+                                            <a href="https://ethereum.stackexchange.com" target="_blank" rel="noopener">Ethereum Stack Exchange</a><br>
+                                            <a href="https://ethereum-magicians.org/" target="_blank" rel="noopener">Ethereum Magicians</a><br>
+                                            <a href="https://ethresear.ch/" target="_blank" rel="noopener">Ethereum Research</a>
+                                        </p>
+                                        
+                                        <h4 id="Other-Tutorials">
+                                            <a class="anchor hidden-xs" href="#Other-Tutorials" title="Other-Tutorials">
+                                                <span class="octicon octicon-link"></span>
+                                            </a>Other Tutorials
+                                        </h4>
+                                        <p><a href="https://cryptozombies.io/en/lesson/1" target="_blank" rel="noopener">Crypto Zombies</a></p>
+                                    </div>
                         </div>
                         <div class="code column">
                             <textarea id="editor">
