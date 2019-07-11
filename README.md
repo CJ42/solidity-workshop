@@ -2,3 +2,17 @@
 A simple Solidity tutorial webpage with embedded code editor and syntax highlighting
 
 For Extropy.io, based on [Substrate tutorial pages](https://substrate.dev/substrate-collectables-workshop/#/1/creating-a-storage-value?id=working-with-a-storage-value)
+
+# Requirements
+
+Here are the steps :
+
+1) Set up a local web server.
+2) Install the following dependencies locally :
+
+```
+npm install highlightjs --save
+npm install highlightjs-solidity --save
+npm install codemirror --save
+npm install codemirror-solidity --save
+```
